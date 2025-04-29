@@ -6,7 +6,7 @@ const buyerSchema = new mongoose.Schema({
   password: { type: String, required: true },
   location: { type: String, required: true },
   phone: { type: String, required: true },
-});
+}, { timestamps: true });
 
 const Buyer = mongoose.model('Buyer', buyerSchema);
 

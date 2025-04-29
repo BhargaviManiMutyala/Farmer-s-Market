@@ -5,6 +5,8 @@ import FarmerLogin from './components/FarmerLogin';
 import BuyerLogin from './components/BuyerLogin';
 import FarmerRegister from './components/FarmerRegister';
 import BuyerRegister from './components/BuyerRegister';
+import FarmerHome from './components/FarmerHome';
+import BuyerHome from './components/BuyerHome';
 import './App.css';
 
 function App() {
@@ -16,10 +18,12 @@ function App() {
         {/* Farmer pages */}
         <Route path="/farmer/login" element={<FarmerLogin />} />
         <Route path="/farmer/register" element={<FarmerRegister />} />
+        <Route path="/farmer/home" element={<FarmerHome />} />
 
         {/* Buyer pages */}
         <Route path="/buyer/login" element={<BuyerLogin />} />
         <Route path="/buyer/register" element={<BuyerRegister />} />
+        <Route path="/buyer/home" element={<BuyerHome />} />
 
         {/* Redirect any unknown route */}
         <Route path="*" element={<Navigate to="/" replace />} />
