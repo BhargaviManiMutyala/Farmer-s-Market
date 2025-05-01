@@ -20,7 +20,7 @@ export default function Navbar({ role }) {
           <>
             <Link to="/farmer/home">Home</Link>
             <Link to="/farmer/addproduct">Add Product</Link>
-            <Link to="/">Requests</Link>
+            <Link to="/farmer/requests">Requests</Link>
             <Link to="/">Cart</Link>
             <Link to="/">Sold</Link>
           </>

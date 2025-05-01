@@ -19,7 +19,16 @@ export default function FarmerLogin() {
         password,
       });
       if (res.status === 200) {
-        // On successful login, redirect to the Farmer Home page
+          // Save farmer details to localStorage
+        const farmer = {
+          phone: res.data.phone,
+          farmName: res.data.farmName,
+          email: res.data.email, // if applicable
+          location: res.data.location // if needed
+        };
+        localStorage.setItem('farmer', JSON.stringify(farmer));
+        console.log('Farmer saved to localStorage:', farmer);
+  
         navigate('/farmer/home');
       } else {
         setError(res.data.error || 'Login failed. Please try again.');

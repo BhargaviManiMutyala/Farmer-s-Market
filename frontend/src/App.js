@@ -9,6 +9,7 @@ import FarmerHome from './components/FarmerHome';
 import BuyerHome from './components/BuyerHome';
 import AddProduct from './components/AddProduct';
 import FarmerProducts from './components/FarmerProducts';
+import FarmerRequests from './components/FarmerRequests';
 import './App.css';
 
 function App() {
@@ -22,6 +23,8 @@ function App() {
         <Route path="/farmer/register" element={<FarmerRegister />} />
         <Route path="/farmer/home" element={<FarmerHome />} />
         <Route path="/farmer/addproduct" element={<AddProduct />} />
+        <Route path="/farmer/requests" element={<FarmerRequests />} />
+
 
         {/* Buyer pages */}
         <Route path="/buyer/login" element={<BuyerLogin />} />

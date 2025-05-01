@@ -24,17 +24,17 @@ router.post('/login', async (req, res) => {
   try {
     const farmer = await Farmer.findOne({ phone });
 
-    if (!farmer) {
-      return res.status(401).json({ error: 'Phone number not found' });
+    if (!farmer || farmer.password !== password) {
+      return res.status(401).json({ error: 'Invalid credentials' });
     }
 
-    if (farmer.password !== password) {
-      return res.status(401).json({ error: 'Incorrect password' });
-    }
-
-    // If credentials match, respond with success status and message
-    res.status(200).json({ message: 'Login successful!' });
-
+    // Return necessary details for localStorage
+    res.status(200).json({
+      phone: farmer.phone,
+      farmName: farmer.farmName,
+      email: farmer.email,
+      location: farmer.location
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'An error occurred while logging in' });
