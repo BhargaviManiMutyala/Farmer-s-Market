@@ -13,6 +13,8 @@ export default function BuyerLogin() {
     e.preventDefault();
 
     try {
+      console.log('Attempting to log in with phone:', phone); // Log attempt
+
       // Make the POST request to the backend
       const res = await axios.post('http://localhost:5000/api/buyers/login', {
         phone,
@@ -20,8 +22,20 @@ export default function BuyerLogin() {
       });
 
       if (res.status === 200) {
-        navigate('/buyer/home'); // Redirect on successful login
-      } else {
+        console.log('Login successful:', res.data); // Log successful login
+
+        // Save the buyer's details to localStorage
+        const buyerData = {
+          name: res.data.marketName, // Assuming the backend returns the buyer's name
+          phone: res.data.phone,
+          email: res.data.email,
+        };
+
+        localStorage.setItem('buyer', JSON.stringify(buyerData)); // Save to localStorage
+        console.log('Buyer details saved to localStorage:', buyerData); // Log saving to localStorage
+
+        navigate('/buyer/home'); // Redirect to the buyer's home page on successful login
+      }else {
         setError(res.data.error || 'Login failed. Please try again.');
       }
     } catch (err) {

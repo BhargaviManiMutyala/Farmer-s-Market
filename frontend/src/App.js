@@ -8,6 +8,7 @@ import BuyerRegister from './components/BuyerRegister';
 import FarmerHome from './components/FarmerHome';
 import BuyerHome from './components/BuyerHome';
 import AddProduct from './components/AddProduct';
+import FarmerProducts from './components/FarmerProducts';
 import './App.css';
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
         <Route path="/buyer/login" element={<BuyerLogin />} />
         <Route path="/buyer/register" element={<BuyerRegister />} />
         <Route path="/buyer/home" element={<BuyerHome />} />
+        <Route path="/buyer/farmer/:phone" element={<FarmerProducts />} />
 
         {/* Redirect any unknown route */}
         <Route path="*" element={<Navigate to="/" replace />} />

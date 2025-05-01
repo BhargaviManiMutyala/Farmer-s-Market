@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar'; // ✅ Don't forget this
 import './Home.css';
 
@@ -30,11 +31,13 @@ export default function BuyerHome() {
 
   return (
     <div>
-      <Navbar role="buyer" /> {/* ✅ Navbar specific to buyer */}
+      <Navbar role="buyer" />
+ {/* ✅ Navbar specific to buyer */}
       <div className="home-container">
         <h3>Available Farmers</h3>
         <div className="card-container">
           {farmers.map((farmer) => (
+            <Link to={`/buyer/farmer/${farmer.phone}`} key={farmer._id} className="card-link">
             <div className="card" key={farmer._id}>
               <h4>{farmer.farmName}</h4>
               <p>Phone: {farmer.phone}</p>
@@ -56,6 +59,7 @@ export default function BuyerHome() {
                 )}
               </div>
             </div>
+            </Link>
           ))}
         </div>
       </div>

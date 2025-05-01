@@ -6,6 +6,7 @@ require('dotenv').config();
 const farmerRoutes = require('./routes/farmerRoutes');
 const buyerRoutes = require('./routes/buyerRoutes');
 const productRoutes = require('./routes/productRoutes');
+const requestRoutes = require('./routes/requestRoutes');
 const app = express();
 
 // Middleware
@@ -18,6 +19,7 @@ app.use('/api/buyers', buyerRoutes);
 app.use('/api/products', productRoutes);
 app.use('/uploads', express.static('uploads')); // to serve images
 
+app.use('/api/requests', requestRoutes);
 
 // MongoDB Connection
 mongoose.connect(process.env.MONGO_URI, {

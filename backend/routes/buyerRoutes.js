@@ -17,27 +17,23 @@ router.post('/register', async (req, res) => {
   }
 });
 
-// Buyer login
 router.post('/login', async (req, res) => {
-  const { phone, password } = req.body;
-
   try {
+    const { phone, password } = req.body;
     const buyer = await Buyer.findOne({ phone });
 
-    if (!buyer) {
-      return res.status(400).json({ error: 'Phone number not found' });
+    if (!buyer || buyer.password !== password) {
+      return res.status(400).json({ error: 'Invalid phone or password' });
     }
 
-    if (buyer.password !== password) {
-      return res.status(400).json({ error: 'Incorrect password' });
-    }
-
-    // If credentials match, respond with success status and message
-    res.status(200).json({ message: 'Login successful!' });
-
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'An error occurred while logging in' });
+    // Send the buyer details upon successful login
+    res.status(200).json({
+      marketName: buyer.marketName,
+      phone: buyer.phone,
+      email: buyer.email,
+    });
+  } catch (err) {
+    res.status(500).json({ error: 'Internal server error' });
   }
 });
 
