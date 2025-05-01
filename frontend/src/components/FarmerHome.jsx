@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import './Home.css';
+import './Home.css'; // same Home.css file
+import Navbar from '../components/Navbar'; // adjust the path based on your file structure
+
 
 export default function FarmerHome() {
   const [buyers, setBuyers] = useState([]);
@@ -12,16 +14,20 @@ export default function FarmerHome() {
   }, []);
 
   return (
-    <div className="home-container">
-      <h2>Welcome, Farmer!</h2>
-      <h3>Available Buyers</h3>
-      <ul>
-        {buyers.map((buyer) => (
-          <li key={buyer._id}>
-            {buyer.marketName} - {buyer.phone} - {buyer.location}
-          </li>
-        ))}
-      </ul>
+    <div>
+      <Navbar role="farmer" />
+      <div className="home-container">
+        <h3>Available Buyers</h3>
+        <div className="card-container">
+          {buyers.map((buyer) => (
+            <div className="card" key={buyer._id}>
+              <h4>{buyer.marketName}</h4>
+              <p>Phone: {buyer.phone}</p>
+              <p>Location: {buyer.location}</p>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

@@ -5,7 +5,7 @@ const cors = require('cors');
 require('dotenv').config();
 const farmerRoutes = require('./routes/farmerRoutes');
 const buyerRoutes = require('./routes/buyerRoutes');
-
+const productRoutes = require('./routes/productRoutes');
 const app = express();
 
 // Middleware
@@ -14,6 +14,9 @@ app.use(express.json());
 
 app.use('/api/farmers', farmerRoutes);
 app.use('/api/buyers', buyerRoutes);
+
+app.use('/api/products', productRoutes);
+app.use('/uploads', express.static('uploads')); // to serve images
 
 
 // MongoDB Connection

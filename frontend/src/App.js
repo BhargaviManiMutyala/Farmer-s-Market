@@ -7,6 +7,7 @@ import FarmerRegister from './components/FarmerRegister';
 import BuyerRegister from './components/BuyerRegister';
 import FarmerHome from './components/FarmerHome';
 import BuyerHome from './components/BuyerHome';
+import AddProduct from './components/AddProduct';
 import './App.css';
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         <Route path="/farmer/login" element={<FarmerLogin />} />
         <Route path="/farmer/register" element={<FarmerRegister />} />
         <Route path="/farmer/home" element={<FarmerHome />} />
+        <Route path="/farmer/addproduct" element={<AddProduct />} />
 
         {/* Buyer pages */}
         <Route path="/buyer/login" element={<BuyerLogin />} />

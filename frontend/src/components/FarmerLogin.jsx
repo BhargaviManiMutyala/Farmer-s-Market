@@ -18,7 +18,6 @@ export default function FarmerLogin() {
         phone,
         password,
       });
-
       if (res.status === 200) {
         // On successful login, redirect to the Farmer Home page
         navigate('/farmer/home');

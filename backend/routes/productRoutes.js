@@ -1,0 +1,47 @@
+const express = require('express');
+const multer = require('multer');
+const Product = require('../models/Product');
+const router = express.Router();
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => cb(null, 'uploads/'),
+  filename: (req, file, cb) => cb(null, Date.now() + '-' + file.originalname),
+});
+
+const upload = multer({ storage });
+
+router.post('/', upload.single('image'), async (req, res) => {
+  try {
+    const newProduct = new Product({
+      ...req.body,
+      image: req.file.filename,
+    });
+    await newProduct.save();
+    res.status(201).json(newProduct);
+  } catch (err) {
+    res.status(500).json({ message: 'Failed to save product', error: err });
+  }
+});
+
+
+// GET request to fetch products by phone number
+router.get('/', async (req, res) => {
+  try {
+    const { phone } = req.query; // Get the phone number from query parameter
+    if (!phone) {
+      return res.status(400).json({ message: 'Phone number is required' });
+    }
+
+    const products = await Product.find({ phone }); // Fetch products based on the phone number
+
+    if (products.length === 0) {
+      return res.status(404).json({ message: 'No products found for this farmer' });
+    }
+
+    res.json(products);
+  } catch (err) {
+    res.status(500).json({ message: 'Server Error', error: err });
+  }
+});
+
+module.exports = router;
