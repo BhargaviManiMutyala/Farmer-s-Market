@@ -28,9 +28,9 @@ export default function Navbar({ role }) {
         {role === 'buyer' && (
           <>
             <Link to="/buyer/home">Home</Link>
-            <Link to="/">Requests</Link>
-            <Link to="/">Cart</Link>
-            <Link to="/">Bought</Link>
+            <Link to="/buyer/requests">Requests</Link>
+            <Link to="/buyer/cart">Cart</Link>
+            <Link to="/buyer/bought">Bought</Link>
           </>
         )}
         <button onClick={handleLogout} className="logout-button">Logout</button>

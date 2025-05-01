@@ -4,7 +4,7 @@ const router = express.Router();
 
 // Create a new request
 router.post('/', async (req, res) => {
-  const { buyerName, buyerPhone, buyerEmail, farmerPhone, productId, productName } = req.body;
+  const { buyerName, buyerPhone, buyerEmail, farmerPhone, productId, productName, quantity, price } = req.body;
 
   try {
     const newRequest = new Request({
@@ -13,7 +13,10 @@ router.post('/', async (req, res) => {
       buyerEmail,
       farmerPhone,
       productId,
-      productName
+      productName,
+      quantity,
+      price,
+      status: 'Pending',  // Default status is 'Pending'
     });
 
     await newRequest.save();
@@ -23,7 +26,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Get all requests for a farmer (by farmer's phone)
+// Get all requests for a specific farmer (by farmer's phone number)
 router.get('/:farmerPhone', async (req, res) => {
   try {
     const requests = await Request.find({ farmerPhone: req.params.farmerPhone }).populate('productId');
@@ -33,7 +36,17 @@ router.get('/:farmerPhone', async (req, res) => {
   }
 });
 
-// Update request status
+// Get all requests for a specific buyer (by buyer's phone number)
+router.get('/buyer/:buyerPhone', async (req, res) => {
+  try {
+    const requests = await Request.find({ buyerPhone: req.params.buyerPhone });
+    res.status(200).json(requests);
+  } catch (err) {
+    res.status(500).json({ message: 'Failed to fetch requests', error: err });
+  }
+});
+
+// Update the status of a request (e.g., from Pending to Accepted or Done)
 router.put('/:id/status', async (req, res) => {
   try {
     const updatedRequest = await Request.findByIdAndUpdate(
@@ -47,13 +60,13 @@ router.put('/:id/status', async (req, res) => {
   }
 });
 
-// DELETE /api/requests/:id
+// DELETE /api/requests/:id - Delete a request by ID
 router.delete('/:id', async (req, res) => {
   try {
     await Request.findByIdAndDelete(req.params.id);
-    res.status(200).json({ message: 'Request deleted successfully' });
+    res.status(200).json({ message: 'Request cancelled successfully' });
   } catch (err) {
-    res.status(500).json({ message: 'Error deleting request', error: err });
+    res.status(500).json({ message: 'Error cancelling request', error: err });
   }
 });
 

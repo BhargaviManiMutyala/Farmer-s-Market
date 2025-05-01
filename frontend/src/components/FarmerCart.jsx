@@ -67,6 +67,7 @@ export default function FarmerCart() {
                 <p><strong>Status:</strong> {r.status}</p>
                 <button onClick={() => handleSold(r)}>Sold</button>
                 <button onClick={() => handleNotSold(r._id)}>Not Sold</button>
+                <p><strong>Contact to buyer to sell the product.</strong></p>
               </div>
             ))
           ) : (

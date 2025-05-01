@@ -12,6 +12,9 @@ import FarmerProducts from './components/FarmerProducts';
 import FarmerRequests from './components/FarmerRequests';
 import FarmerCart from './components/FarmerCart';
 import FarmerSold from './components/FarmerSold';
+import BuyerRequests from './components/BuyerRequests';
+import BuyerCart from './components/BuyerCart';
+import BuyerBought from './components/BuyerBought';
 
 import './App.css';
 
@@ -35,6 +38,9 @@ function App() {
         <Route path="/buyer/register" element={<BuyerRegister />} />
         <Route path="/buyer/home" element={<BuyerHome />} />
         <Route path="/buyer/farmer/:phone" element={<FarmerProducts />} />
+        <Route path="/buyer/requests" element={<BuyerRequests />} />
+        <Route path="/buyer/cart" element={<BuyerCart />} />
+        <Route path="/buyer/bought" element={<BuyerBought />} />
 
         {/* Redirect any unknown route */}
         <Route path="*" element={<Navigate to="/" replace />} />

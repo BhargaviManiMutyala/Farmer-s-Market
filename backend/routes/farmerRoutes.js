@@ -41,6 +41,26 @@ router.post('/login', async (req, res) => {
   }
 });
 
+// Fetch farmer details by phone number
+router.get('/:phone', async (req, res) => {
+  try {
+    const farmer = await Farmer.findOne({ phone: req.params.phone });
+
+    if (!farmer) {
+      return res.status(404).json({ message: 'Farmer not found' });
+    }
+
+    res.status(200).json({
+      farmName: farmer.farmName,
+      email: farmer.email,
+      location: farmer.location,
+      phone: farmer.phone,
+    });
+  } catch (err) {
+    res.status(500).json({ message: 'Error fetching farmer details', error: err });
+  }
+});
+
 router.get('/', async (req, res) => {
   try {
     const farmers = await Farmer.find();
