@@ -12,15 +12,24 @@ export default function FarmerRequests() {
       // Fetch requests for this farmer based on the farmer's phone
       axios.get(`http://localhost:5000/api/requests/${farmer.phone}`)
 
-        .then((res) => {
-          setRequests(res.data); // Set the requests data
-        })
-        .catch((err) => {
-          console.error('Error fetching requests:', err);
-        });
+         .then((res) => {
+        setRequests(res.data.filter(r => r.status === 'Pending'));
+      })
+      .catch((err) => console.error('Error fetching requests:', err));
     }
   }, [farmer]);
 
+  const handleAccept = async (id) => {
+    try {
+      await axios.put(`http://localhost:5000/api/requests/${id}/status`, { status: 'Accepted' });
+      setRequests(prev => prev.filter(r => r._id !== id)); // Remove from list after accepting
+      alert('Added to cart!');
+    } catch (err) {
+      console.error('Error updating status:', err);
+      alert('Failed to approve request.');
+    }
+  };
+  
   if (!farmer) return <p>Please log in as a farmer.</p>;
 
   return (
@@ -38,7 +47,7 @@ export default function FarmerRequests() {
                 <p><strong>Email:</strong> {request.buyerEmail}</p>
                 <p><strong>Status:</strong> {request.status}</p>
                 <p><strong>Created At:</strong> {new Date(request.createdAt).toLocaleString()}</p>
-                <button>Approve</button> {/* Add functionality to approve request */}
+                <button onClick={() => handleAccept(request._id)}>Approve</button> {/* Add functionality to approve request */}
                 <button>Reject</button> {/* Add functionality to reject request */}
               </div>
             ))

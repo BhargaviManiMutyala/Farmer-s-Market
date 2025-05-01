@@ -10,6 +10,9 @@ import BuyerHome from './components/BuyerHome';
 import AddProduct from './components/AddProduct';
 import FarmerProducts from './components/FarmerProducts';
 import FarmerRequests from './components/FarmerRequests';
+import FarmerCart from './components/FarmerCart';
+import FarmerSold from './components/FarmerSold';
+
 import './App.css';
 
 function App() {
@@ -24,7 +27,8 @@ function App() {
         <Route path="/farmer/home" element={<FarmerHome />} />
         <Route path="/farmer/addproduct" element={<AddProduct />} />
         <Route path="/farmer/requests" element={<FarmerRequests />} />
-
+        <Route path="/farmer/cart" element={<FarmerCart />} />
+        <Route path="/farmer/sold" element={<FarmerSold />} />
 
         {/* Buyer pages */}
         <Route path="/buyer/login" element={<BuyerLogin />} />

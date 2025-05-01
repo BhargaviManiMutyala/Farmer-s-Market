@@ -21,13 +21,14 @@ export default function Navbar({ role }) {
             <Link to="/farmer/home">Home</Link>
             <Link to="/farmer/addproduct">Add Product</Link>
             <Link to="/farmer/requests">Requests</Link>
-            <Link to="/">Cart</Link>
-            <Link to="/">Sold</Link>
+            <Link to="/farmer/cart">Cart</Link>
+            <Link to="/farmer/sold">Sold</Link>
           </>
         )}
         {role === 'buyer' && (
           <>
             <Link to="/buyer/home">Home</Link>
+            <Link to="/">Requests</Link>
             <Link to="/">Cart</Link>
             <Link to="/">Bought</Link>
           </>

@@ -33,4 +33,28 @@ router.get('/:farmerPhone', async (req, res) => {
   }
 });
 
+// Update request status
+router.put('/:id/status', async (req, res) => {
+  try {
+    const updatedRequest = await Request.findByIdAndUpdate(
+      req.params.id,
+      { status: req.body.status },
+      { new: true }
+    );
+    res.status(200).json(updatedRequest);
+  } catch (err) {
+    res.status(500).json({ message: 'Failed to update request status', error: err });
+  }
+});
+
+// DELETE /api/requests/:id
+router.delete('/:id', async (req, res) => {
+  try {
+    await Request.findByIdAndDelete(req.params.id);
+    res.status(200).json({ message: 'Request deleted successfully' });
+  } catch (err) {
+    res.status(500).json({ message: 'Error deleting request', error: err });
+  }
+});
+
 module.exports = router;
